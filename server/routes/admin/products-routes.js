@@ -1,5 +1,5 @@
+// products-routes.js
 const express = require("express");
-
 const {
   handleImageUpload,
   addProduct,
@@ -8,10 +8,11 @@ const {
   deleteProduct,
 } = require("../../controllers/admin/products-controller");
 
-const { upload } = require("../../helpers/cloudinary");
+const { upload } = require("../../helpers/cloudinarycode");
 
 const router = express.Router();
 
+// Routes setup
 router.post("/upload-image", upload.single("my_file"), handleImageUpload);
 router.post("/add", addProduct);
 router.put("/edit/:id", editProduct);

@@ -1,86 +1,60 @@
-const Order = require("../../models/Order");
-
-const getAllOrdersOfAllUsers = async (req, res) => {
+// products-controller.js
+const handleImageUpload = async (req, res) => {
   try {
-    const orders = await Order.find({});
-
-    if (!orders.length) {
-      return res.status(404).json({
-        success: false,
-        message: "No orders found!",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: orders,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Some error occured!",
-    });
+    // Logic to handle image upload
+    res.status(200).json({ success: true, message: "Image uploaded successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Image upload failed!" });
   }
 };
 
-const getOrderDetailsForAdmin = async (req, res) => {
+const addProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const order = await Order.findById(id);
-
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found!",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: order,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Some error occured!",
-    });
+    // Logic to add a new product
+    res.status(201).json({ success: true, message: "Product added successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Failed to add product!" });
   }
 };
 
-const updateOrderStatus = async (req, res) => {
+const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { orderStatus } = req.body;
+    // Logic to edit a product
+    res.status(200).json({ success: true, message: "Product edited successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Failed to edit product!" });
+  }
+};
 
-    const order = await Order.findById(id);
+const fetchAllProducts = async (req, res) => {
+  try {
+    // Logic to fetch all products
+    res.status(200).json({ success: true, data: [] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Failed to fetch products!" });
+  }
+};
 
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found!",
-      });
-    }
-
-    await Order.findByIdAndUpdate(id, { orderStatus });
-
-    res.status(200).json({
-      success: true,
-      message: "Order status is updated successfully!",
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Some error occured!",
-    });
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Logic to delete a product
+    res.status(200).json({ success: true, message: "Product deleted successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Failed to delete product!" });
   }
 };
 
 module.exports = {
-  getAllOrdersOfAllUsers,
-  getOrderDetailsForAdmin,
-  updateOrderStatus,
+  handleImageUpload,
+  addProduct,
+  editProduct,
+  fetchAllProducts,
+  deleteProduct,
 };

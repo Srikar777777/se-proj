@@ -16,16 +16,16 @@ const shopReviewRouter = require("./routes/shop/review-routes");
 const commonFeatureRouter = require("./routes/common/feature-routes");
 
 mongoose
-  .connect("db_url")
+  .connect("mongodb+srv://prasadvvvkaranam:labproject@cluster0.d06n0.mongodb.net/e_buy?retryWrites=true&w=majority&tls=true&tlsInsecure=true")
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5100",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
